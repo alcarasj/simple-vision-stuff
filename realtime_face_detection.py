@@ -4,8 +4,8 @@ import sys
 
 camera = cv2.VideoCapture(0)
 
-while(1):
-	ret, frame = camera.read()
+while True:
+	(grabbed, frame) = camera.read()
 	face_cascade = cv2.CascadeClassifier("./env/lib/python3.7/site-packages/cv2/data/haarcascade_frontalface_default.xml")
 	eye_cascade = cv2.CascadeClassifier("./env/lib/python3.7/site-packages/cv2/data/haarcascade_eye.xml")
 	grayscale = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
