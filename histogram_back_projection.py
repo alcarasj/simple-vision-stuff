@@ -10,14 +10,11 @@ UNCHANGED = cv2.IMREAD_UNCHANGED
 parser = ArgumentParser(description="Histogram back-projection.")
 parser.add_argument("-i", "--input", dest="input_path",
 					help="Input path for the image.")
-parser.add_argument("-o", "--output", dest="output_path",
-					help="Output path for the resulting image.")
 args = parser.parse_args()
 input_path = args.input_path
-output_path = args.output_path
 
-if not input_path or not output_path:
-	print("Specify input and output paths for images as arguments.")
+if not input_path:
+	print("Specify an input path for the image as an argument.")
 else:
 	input_image = cv2.imread(input_path)
 	roi = cv2.selectROI(input_image, fromCenter=False)
@@ -37,7 +34,7 @@ else:
 	threshold = cv2.merge((threshold, threshold, threshold))
 	result = cv2.bitwise_and(input_image, threshold)
 	result = numpy.vstack((input_image, threshold, result))
-	cv2.imwrite(output_path, result)
-	
+
+	cv2.imshow("Result", result)
 	cv2.waitKey(0)
 	cv2.destroyAllWindows()
