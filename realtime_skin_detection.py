@@ -1,29 +1,46 @@
+"""
+https://www.pyimagesearch.com/2014/08/18/skin-detection-step-step-example-using-python-opencv/
+
+Real-time (webcam) skin detection using masks.
+
+"""
+
 import numpy
 import cv2
 import sys
 
-LOWER_BOUND = numpy.array([0, 48, 80], dtype="uint8")
-UPPER_BOUND = numpy.array([20, 255, 255], dtype="uint8")
-
 camera = cv2.VideoCapture(0)
 
-while(1):
+# Define the range of skin color in HSV.
+lower_bound = numpy.array([0, 48, 80], dtype="uint8")
+upper_bound = numpy.array([20, 255, 255], dtype="uint8")
+
+while True:
+	# Keep reading frames from the camera.
 	(grabbed, frame) = camera.read()
-	converted = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
-	skin_mask = cv2.inRange(converted, LOWER_BOUND, UPPER_BOUND)
 
+	# Convert BGR to HSV.
+	hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
+
+	# Create a mask for skin isolation.
+	mask = cv2.inRange(hsv, lower_bound, upper_bound)
+
+	# Apply a series of erosions and dilations to the mask using an elliptical kernel.
 	kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (11, 11))
-	skin_mask = cv2.erode(skin_mask, kernel, iterations=2)
-	skin_mask = cv2.dilate(skin_mask, kernel, iterations=2)
+	mask = cv2.erode(mask, kernel, iterations=2)
+	mask = cv2.dilate(mask, kernel, iterations=2)
 
-	skin_mask = cv2.GaussianBlur(skin_mask, (3, 3), 0)
-	skin = cv2.bitwise_and(frame, frame, mask=skin_mask)
+	# Use a Gaussian blur the mask to help remove noise, then apply the mask to the frame.
+	mask = cv2.GaussianBlur(mask, (3, 3), 0)
+	skin = cv2.bitwise_and(frame, frame, mask=mask)
 
+	# Show the detected skin in the frame.
 	cv2.imshow("Skin Detection", skin)
 
+	# Press ESC key to quit.
 	key = cv2.waitKey(5) & 0xFF
 	if key == 27:
 		break
 
-cap.release()
+camera.release()
 cv2.destroyAllWindows()

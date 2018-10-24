@@ -7,7 +7,7 @@ COLOR = cv2.IMREAD_COLOR
 GRAYSCALE = cv2.IMREAD_GRAYSCALE
 UNCHANGED = cv2.IMREAD_UNCHANGED
 
-parser = ArgumentParser(description="Histogram back-projection.")
+parser = ArgumentParser(description="Basic template for Python OpenCV projects.")
 parser.add_argument("-i", "--input", dest="input_path",
 					help="Input path for the image.")
 parser.add_argument("-o", "--output", dest="output_path",
