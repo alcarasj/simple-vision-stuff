@@ -10,8 +10,8 @@ import cv2
 import sys
 
 camera = cv2.VideoCapture(0)
-face_cascade = cv2.CascadeClassifier("./assets/haarcascade_frontalface_default.xml")
-eye_cascade = cv2.CascadeClassifier("./assets/haarcascade_eye.xml")
+face_cascade = cv2.CascadeClassifier("../assets/haarcascade_frontalface_default.xml")
+eye_cascade = cv2.CascadeClassifier("../assets/haarcascade_eye.xml")
 
 while True:
 	# Keep reading frames from the camera.
