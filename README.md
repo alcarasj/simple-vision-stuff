@@ -1,4 +1,4 @@
-# CS7GV1 Computer Vision - Assignment 1
+# CS7GV1 Computer Vision
 
 ## Installation
 Requires `python3`, `pip3` and `virtualenv` to be installed on your machine.
@@ -9,3 +9,11 @@ Requires `python3`, `pip3` and `virtualenv` to be installed on your machine.
 
 ## Usage
 `python3 NAME_OF_SCRIPT`
+
+## Assignment 1
+The following applications were created:
+- Real-time Canny edge detection.
+- Real-time skin detection.
+- Real-time Haar face detection.
+- Real-time motion detection.
+- Swain-Ballard histogram back-projection.
